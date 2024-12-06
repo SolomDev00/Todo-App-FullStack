@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { Pen, Trash } from "lucide-react";
+import { ITodos } from "@/interfaces";
+import { Badge } from "./ui/badge";
 
-export default function TodoTable() {
+export default function TodosTable({ todos }: { todos: ITodos[] }) {
   return (
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
@@ -24,19 +26,21 @@ export default function TodoTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">121212</TableCell>
-          <TableCell>Solom</TableCell>
-          <TableCell>completed</TableCell>
-          <TableCell className="flex items-center justify-end gap-2 text-right">
-            <Button size={"icon"}>
-              <Pen size={16} />
-            </Button>
-            <Button size={"icon"} variant={"destructive"}>
-              <Trash size={16} />
-            </Button>
-          </TableCell>
-        </TableRow>
+        {todos.map((todo) => (
+          <TableRow key={todo.id}>
+            <TableCell className="font-medium">{todo.id}</TableCell>
+            <TableCell>{todo.title}</TableCell>
+                <TableCell>{todo.complated ? <Badge>Completed</Badge> : <Badge variant={"secondary"}>Uncompleted</Badge>}</TableCell>
+            <TableCell className="flex items-center justify-end gap-2 text-right">
+              <Button size={"icon"}>
+                <Pen size={16} />
+              </Button>
+              <Button size={"icon"} variant={"destructive"}>
+                <Trash size={16} />
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
       <TableFooter>
         <TableRow>

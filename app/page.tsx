@@ -10,12 +10,7 @@ export default async function Home() {
     <div className="container">
       <ModeToggle />
       <AddTodoForm />
-      <TodoTable />
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      <TodoTable todos={todos} />
     </div>
   );
 }
