@@ -24,6 +24,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { todoFormSchema, TodoFormValues } from "@/schema";
+import { createTodoAction } from "@/actions/todo.actions";
 
 const AddTodoForm = () => {
   const defaultValues: Partial<TodoFormValues> = {
@@ -37,8 +38,8 @@ const AddTodoForm = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data: TodoFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: TodoFormValues) => {
+    await createTodoAction({title: data.title, body: data.body})
   };
 
   return (
