@@ -1,4 +1,4 @@
-export interface ITodos {
+export interface ITodo {
     title: string;
     body: string | null;
     complated: boolean;

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -28,16 +27,17 @@ import { createTodoAction } from "@/actions/todo.actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import Spinner from "./Spinner";
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { Pen } from "lucide-react";
+import { ITodo } from "@/interfaces";
 
-const AddTodoForm = () => {
+const EditTodoForm = ({ todo }: { todo: ITodo }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const defaultValues: Partial<TodoFormValues> = {
-    title: "",
-    body: "",
-    complated: false,
+    title: todo.title,
+    body: todo.body as string,
+    complated: todo.complated,
   };
 
   const form = useForm<TodoFormValues>({
@@ -56,14 +56,13 @@ const AddTodoForm = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline"><Plus /> Add a new Todo</Button>
+        <Button size={"icon"}>
+        <Pen size={16} />
+      </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add a new Todo</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </DialogDescription>
+          <DialogTitle>Edit Todo</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -105,10 +104,10 @@ const AddTodoForm = () => {
               name="complated"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Completed</FormLabel>
                   <FormControl>
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
+                  <FormLabel>Completed</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
@@ -123,4 +122,4 @@ const AddTodoForm = () => {
   );
 };
 
-export default AddTodoForm;
+export default EditTodoForm;

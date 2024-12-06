@@ -8,11 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ITodos } from "@/interfaces";
+import { ITodo } from "@/interfaces";
 import { Badge } from "./ui/badge";
 import TodosTableActions from "./TodosTableActions";
 
-export default function TodosTable({ todos }: { todos: ITodos[] }) {
+export default function TodosTable({ todos }: { todos: ITodo[] }) {
   return (
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
@@ -37,7 +37,7 @@ export default function TodosTable({ todos }: { todos: ITodos[] }) {
               )}
             </TableCell>
             <TableCell className="flex items-center justify-end gap-2 text-right">
-              <TodosTableActions id={todo.id} />
+              <TodosTableActions todo={todo} />
             </TableCell>
           </TableRow>
         ))}
