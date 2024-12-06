@@ -68,7 +68,6 @@ const AddTodoForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="body"
