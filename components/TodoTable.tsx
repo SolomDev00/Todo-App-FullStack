@@ -8,10 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "./ui/button";
-import { Pen, Trash } from "lucide-react";
 import { ITodos } from "@/interfaces";
 import { Badge } from "./ui/badge";
+import TodosTableActions from "./TodosTableActions";
 
 export default function TodosTable({ todos }: { todos: ITodos[] }) {
   return (
@@ -30,14 +29,15 @@ export default function TodosTable({ todos }: { todos: ITodos[] }) {
           <TableRow key={todo.id}>
             <TableCell className="font-medium">{todo.id}</TableCell>
             <TableCell>{todo.title}</TableCell>
-                <TableCell>{todo.complated ? <Badge>Completed</Badge> : <Badge variant={"secondary"}>Uncompleted</Badge>}</TableCell>
+            <TableCell>
+              {todo.complated ? (
+                <Badge>Completed</Badge>
+              ) : (
+                <Badge variant={"secondary"}>Uncompleted</Badge>
+              )}
+            </TableCell>
             <TableCell className="flex items-center justify-end gap-2 text-right">
-              <Button size={"icon"}>
-                <Pen size={16} />
-              </Button>
-              <Button size={"icon"} variant={"destructive"}>
-                <Trash size={16} />
-              </Button>
+              <TodosTableActions id={todo.id} />
             </TableCell>
           </TableRow>
         ))}
@@ -45,7 +45,7 @@ export default function TodosTable({ todos }: { todos: ITodos[] }) {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
+          <TableCell className="text-right">{todos.length}</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

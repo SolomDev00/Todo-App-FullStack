@@ -7,7 +7,7 @@ export default async function Home() {
   const todos = await getTodoListAction();
 
   return (
-    <div className="container">
+    <div className="container w-full">
       <ModeToggle />
       <AddTodoForm />
       <TodoTable todos={todos} />
