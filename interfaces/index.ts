@@ -1,7 +1,7 @@
 export interface ITodo {
+    id?: string;
     title: string;
     body: string | null;
     complated: boolean;
-    id: string;
-    createdAt: Date;
+    createdAt?: Date;
 }

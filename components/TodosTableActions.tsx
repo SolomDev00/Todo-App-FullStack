@@ -19,7 +19,7 @@ const TodosTableActions = ({ todo }: { todo: ITodo }) => {
         variant={"destructive"}
         onClick={async () => {
           setLoading(true);
-          await deleteTodoAction({ id: todo.id });
+          await deleteTodoAction({ id: todo?.id });
           setLoading(false);
         }}
       >
