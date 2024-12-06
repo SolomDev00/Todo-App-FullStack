@@ -26,8 +26,13 @@ import { useForm } from "react-hook-form";
 import { todoFormSchema, TodoFormValues } from "@/schema";
 import { createTodoAction } from "@/actions/todo.actions";
 import { Checkbox } from "@/components/ui/checkbox";
+import Spinner from "./Spinner";
+import { useState } from "react";
 
 const AddTodoForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const defaultValues: Partial<TodoFormValues> = {
     title: "",
     body: "",
@@ -40,12 +45,15 @@ const AddTodoForm = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: TodoFormValues) => {
-    await createTodoAction({ title: data.title, body: data.body, complated: data.complated })
+  const onSubmit = async ({ title, body, complated }: TodoFormValues) => {
+    setLoading(true);
+    await createTodoAction({ title, body, complated })
+    setLoading(false);
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Edit Profile</Button>
       </DialogTrigger>
@@ -104,7 +112,7 @@ const AddTodoForm = () => {
                 </FormItem>
               )}
             />
-          <Button type="submit">Save changes</Button>
+            <Button type="submit" disabled={loading}>{loading ? <><Spinner /> Saving</> : "Save changes"}</Button>
           </form>
         </Form>
         <DialogFooter>
