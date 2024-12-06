@@ -1,3 +1,4 @@
+import { getTodoListAction } from "@/actions/todo.actions"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -11,9 +12,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function Home() {
+export default async function Home() {
+  const todos = await getTodoListAction();
+
   return (
-    <div>
+    <div className="container">
+      {
+        todos.map((todo, idx) => <li key={idx}>{todo.title}</li>)
+      }
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
