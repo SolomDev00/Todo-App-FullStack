@@ -30,14 +30,14 @@ import Spinner from "./Spinner";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 
-const AddTodoForm = () => {
+const AddTodoForm = ({ userId }: { userId: string | null}) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
   const defaultValues: Partial<TodoFormValues> = {
     title: "",
     body: "",
-    complated: false,
+    completed: false,
   };
 
   const form = useForm<TodoFormValues>({
@@ -46,9 +46,9 @@ const AddTodoForm = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async ({ title, body, complated }: TodoFormValues) => {
+  const onSubmit = async ({ title, body, completed }: TodoFormValues) => {
     setLoading(true);
-    await createTodoAction({ title, body, complated })
+    await createTodoAction({ title, body, completed, userId })
     setLoading(false);
     setOpen(false);
   };
@@ -102,7 +102,7 @@ const AddTodoForm = () => {
             />
             <FormField
               control={form.control}
-              name="complated"
+              name="completed"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Completed</FormLabel>
