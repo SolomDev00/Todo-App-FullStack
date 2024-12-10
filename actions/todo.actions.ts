@@ -81,7 +81,7 @@ export const createTodoAction = async ({
 export const deleteTodoAction = async ({
   id,
 }: {
-  id: string;
+  id: string | undefined;
 }): Promise<void> => {
   await prisma.todo.delete({
     where: {

@@ -104,11 +104,13 @@ const AddTodoForm = ({ userId }: { userId: string | null}) => {
               control={form.control}
               name="completed"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Completed</FormLabel>
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
+                <FormItem className="flex items-center gap-1">
+                  <div className="flex items-center space-x-2">
+                    <FormControl>
+                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                    <FormLabel>Completed</FormLabel>
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
