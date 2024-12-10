@@ -19,7 +19,7 @@ export const getUserTodoListAction = async ({
 }: {
   userId: string | null;
 }): Promise<Array<ITodo>> => {
-  try {
+  // try {
     return await prisma.todo.findMany({
       where: {
         user_id: userId as string,
@@ -28,9 +28,9 @@ export const getUserTodoListAction = async ({
         createdAt: "desc",
       },
     });
-  } catch (error) {
-    throw new Error("Something went wrong");
-  }
+  // } catch (error) {
+  //   throw new Error("Something went wrong");
+  // }
 };
 
 /**

@@ -1,6 +1,6 @@
 import { getUserTodoListAction } from "@/actions/todo.actions";
 import AddTodoForm from "@/components/AddTodoForm";
-import TodoTable from "@/components/TodoTable";
+import TodosTable from "@/components/TodoTable";
 import { auth } from "@clerk/nextjs";
 
 export default async function Home() {
@@ -8,13 +8,11 @@ export default async function Home() {
   const todos = await getUserTodoListAction({ userId });
 
   return (
-    <div className="container">  
-    <div className="w-full flex flex-col items-center justify-center">
-      <div className="w-full flex items-center justify-between">
-          <AddTodoForm userId={userId} />
+    <main className="container">
+      <div className="mx-auto flex w-full flex-col justify-center space-y-4 mt-10">
+        <AddTodoForm userId={userId} />
+        <TodosTable todos={todos} />
       </div>
-      <TodoTable todos={todos} />
-    </div>
-    </div>
+    </main>
   );
 }

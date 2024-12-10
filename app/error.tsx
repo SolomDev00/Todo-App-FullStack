@@ -26,7 +26,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
                                 </svg>
                             </div>
                         </div>
-                        <h2 className="mt-5 text-[36px] font-bold lg:text-[50px]">{error}</h2>
+                        <h2 className="mt-5 text-[36px] font-bold lg:text-[50px]">Something Went Wrong</h2>
                         <p className="mt-5 lg:text-lg">
                             Oops something went wrong. Try to refresh this page or <br /> feel free to contact us if the problem
                             presists.

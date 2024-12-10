@@ -37,7 +37,7 @@ const EditTodoForm = ({ todo }: { todo: ITodo }) => {
   const defaultValues: Partial<TodoFormValues> = {
     title: todo.title,
     body: todo.body as string,
-    complated: todo.complated,
+    completed: todo.completed,
   };
 
   const form = useForm<TodoFormValues>({
@@ -48,7 +48,7 @@ const EditTodoForm = ({ todo }: { todo: ITodo }) => {
 
   const onSubmit = async (data: TodoFormValues) => {
     setLoading(true);
-    await updateTodoAction({id: todo.id, title: data.title, body: data.body as string, complated: data.complated})
+    await updateTodoAction({id: todo.id, title: data.title, body: data.body as string, completed: data.completed})
     setLoading(false);
     setOpen(false);
   };
@@ -101,7 +101,7 @@ const EditTodoForm = ({ todo }: { todo: ITodo }) => {
             />
             <FormField
               control={form.control}
-              name="complated"
+              name="completed"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
